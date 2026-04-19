@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>英语划线学习（第1步）</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="toolbar">
+      <h1>英语划线学习（第1步）</h1>
+      <label class="switch-row">
+        <input id="toggle-annotations" type="checkbox" checked />
+        <span>显示标注</span>
+      </label>
+      <button id="clear-btn" type="button">清空记录</button>
+    </header>
+
+    <main class="layout">
+      <section class="panel input-panel">
+        <h2>1) 粘贴英文文本</h2>
+        <label class="file-row">
+          <span>上传 txt/md 文件：</span>
+          <input id="file-input" type="file" accept=".txt,.md,text/plain,text/markdown" />
+        </label>
+        <textarea
+          id="source-input"
+          placeholder="请粘贴英文内容..."
+        >The president has announced a new plan. Many citizens are concerned about the long-term impact.</textarea>
+        <button id="render-btn" type="button">渲染到阅读区</button>
+        <p class="hint">支持较长文本。阅读区选中单词/词组后会自动翻译并自动划线；若翻译失败，会在右侧面板让你补充释义。</p>
+      </section>
+
+      <section class="panel reader-panel">
+        <h2>2) 阅读区（可划线）</h2>
+        <div id="reader" class="reader"></div>
+        <p id="status-text" class="hint">状态：等待选中内容</p>
+      </section>
+
+      <section class="panel list-panel">
+        <h2>3) 标注记录</h2>
+        <div id="editor-panel" class="editor-panel is-hidden">
+          <p id="editor-title" class="editor-title">新建释义</p>
+          <p class="editor-word">
+            词条：<strong id="editor-word"></strong>
+          </p>
+          <label class="editor-label" for="editor-meaning">中文释义（必填）</label>
+          <textarea id="editor-meaning" class="editor-input" placeholder="例如：总统"></textarea>
+          <label class="editor-label" for="editor-phrases">相关短语（可选，多个用英文分号 ; 分隔）</label>
+          <textarea
+            id="editor-phrases"
+            class="editor-input"
+            placeholder="例如：vice president: 副总统; president-elect: 当选总统"
+          ></textarea>
+          <div class="editor-actions">
+            <button id="editor-save-btn" type="button">保存释义</button>
+            <button id="editor-cancel-btn" type="button">取消</button>
+          </div>
+        </div>
+        <ul id="annotation-list" class="annotation-list"></ul>
+      </section>
+    </main>
+
+    <template id="annotation-item-template">
+      <li class="annotation-item">
+        <p><strong class="word"></strong> <span class="meaning"></span></p>
+        <p class="phrases"></p>
+        <button class="edit-btn" type="button">编辑释义</button>
+      </li>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
